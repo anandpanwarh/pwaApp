@@ -1,10 +1,7 @@
-<h1>pwa app updated</h1>
+<h1>pwa app v1.0.0</h1>
 <img src="assets/icons/icon-72x72.png" alt="image">
-<hr>
 <ul>
-  <li *ngFor="let item of items">
-    <h3>{{item.name}}</h3>
-    <p>{{item.description}}</p>
-    <a href="{{item.url}}">More</a>
+  <li *ngFor="let user of userList | async">
+    {{ user.name }}
   </li>
-</ul>
+</ul> 

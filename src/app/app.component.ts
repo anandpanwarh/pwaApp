@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Item } from './core/service/api.service';
-import { SwUpdate } from '@angular/service-worker';
+import { WeatherService } from './services/weather.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +8,20 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'pwademo';
-  items: Array<Item>;
+  userList: Observable<any>;
 
-  constructor(private apiService: ApiService, private _swUpdate: SwUpdate) {
-  }
-  ngOnInit() {
-    if(this._swUpdate.isEnabled) {
-      this._swUpdate.available.subscribe(() => {
-        if(confirm('New version available. Load new version?')) {
-          window.location.reload();
-        }
-      })
-    }
-    this.fetchData();
+
+  constructor(
+    private _userSvc: WeatherService
+  ) { }
+
+
+  ngOnInit() { 
+    this.getUsers();
   }
 
-  fetchData() {
-    this.apiService.fetch().subscribe((data: Array<Item>) => {
-      console.log(data);
-      this.items = data;
-    }, (err) => {
-      console.log(err);
-    });
+  getUsers() {
+    this.userList = this._userSvc.getUsers();
   }
-
+  
 }
