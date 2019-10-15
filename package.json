@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "pwabuild": "ng build --prod --output-hashing=none && node ./mergelib.js",
+    "pwaprod": "npm run pwabuild && cd ./dist/pwa-app && http-server -c-1"
   },
   "private": true,
   "dependencies": {
@@ -18,7 +20,10 @@
     "@angular/forms": "~7.2.0",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/pwa": "^0.12.4",
     "@angular/router": "~7.2.0",
+    "@angular/service-worker": "~7.2.0",
+    "concat": "^1.0.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
